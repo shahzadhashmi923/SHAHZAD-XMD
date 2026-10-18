@@ -1,8 +1,0 @@
-{
-  "name": "shazi-xmd",
-  "type": "module",
-  "dependencies": {
-    "@whiskeysockets/baileys": "^6.7.18",
-    "qrcode": "^1.5.3"
-  }
-}
