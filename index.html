@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>SHAZI XMD - Pair Code</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Inter, sans-serif}
+body{background:#0e0b14;color:#fff;display:flex;justify-content:center;padding:20px;transition:.3s}
+body.light{background:#f2e9ff;color:#111}
+.card{width:100%;max-width:420px;background:#1a1625;border-radius:24px;padding:20px;border:1px solid #2a2440;position:relative;box-shadow:0 0 30px rgba(168,85,247,.2)}
+.top-icons{display:flex;justify-content:flex-end;gap:8px;margin-bottom:10px}
+.icon-btn{width:32px;height:32px;background:#2a2440;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;border:none;color:#a78bfa}
+.logo{width:70px;height:70px;background:linear-gradient(135deg,#a855f7,#ec4899);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 10px;font-size:32px}
+.title{text-align:center;font-size:28px;font-weight:800;color:#a855f7;letter-spacing:1px}
+.sub{text-align:center;color:#9ca3af;margin:6px 0 15px;font-size:14px}
+.select-row{display:flex;justify-content:flex-end;gap:8px;margin-bottom:10px}
+.small-btn{background:#2a2440;border:1px solid #3a3450;padding:6px 12px;border-radius:20px;font-size:12px;cursor:pointer;color:#fff}
+.server-box{background:#211d30;border-radius:16px;padding:14px;display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.server-left b{font-size:15px}
+.badge{background:#a855f7;padding:2px 8px;border-radius:10px;font-size:10px;margin-left:6px}
+.row2{display:flex;gap:10px;margin-bottom:12px}
+.row2 button{flex:1;background:#211d30;border:1px solid #2a2440;padding:12px;border-radius:12px;color:#fff;cursor:pointer}
+.quick{background:#211d30;border-radius:16px;padding:14px;margin-bottom:15px;border-left:3px solid #a855f7}
+.input-box{background:#211d30;border:1px solid #3a3450;border-radius:12px;padding:14px;display:flex;align-items:center;gap:10px;margin:10px 0}
+.input-box input{background:transparent;border:none;outline:none;color:#fff;width:100%;font-size:16px}
+.gen-btn{width:100%;background:#a855f7;border:none;padding:16px;border-radius:14px;color:#fff;font-weight:700;font-size:16px;cursor:pointer;margin:10px 0}
+.code-box{background:#0e0b14;border:1px dashed #3a3450;border-radius:12px;padding:20px;text-align:center;min-height:60px}
+#pairCode{font-size:28px;font-weight:800;letter-spacing:4px;color:#a855f7}
+.timer{margin-top:8px;color:#f87171;font-weight:600}
+.footer{text-align:center;font-size:11px;color:#6b7280;margin-top:15px;border-top:1px solid #211d30;padding-top:12px}
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="top-icons">
+    <button class="icon-btn" onclick="toggleTheme()"><i class="fa-solid fa-moon"></i></button>
+    <button class="icon-btn" onclick="toggleSound()"><i id="volIcon" class="fa-solid fa-volume-high"></i></button>
+    <button class="icon-btn" onclick="location.reload()"><i class="fa-solid fa-rotate"></i></button>
+    <button class="icon-btn"><i class="fa-solid fa-star"></i></button>
+    <button class="icon-btn"><i class="fa-solid fa-gift"></i></button>
+  </div>
+
+  <div class="logo"><i class="fa-solid fa-bolt"></i></div>
+  <div class="title">SHAZI XMD</div>
+  <div class="sub">Generate Your Pairing Code</div>
+  
+  <div style="text-align:center;font-size:12px;color:#9ca3af;margin-bottom:12px">📊 Success Rate: <span id="rate">87%</span> (1✓ / 5x)</div>
+
+  <div class="select-row">
+    <button class="small-btn" onclick="toggleLang()">🌐 Language</button>
+    <button class="small-btn" onclick="toggleTheme()">🎨 Theme ▾</button>
+  </div>
+
+  <div class="server-box">
+    <div class="server-left">
+      <b><i class="fa-solid fa-server" style="color:#a855f7"></i> Server <span id="serverNum">43</span> <span class="badge">⚡ AUTO</span></b>
+      <div style="font-size:12px;color:#9ca3af;margin-top:4px">● Active: 2 &nbsp; 👥 Limit: <span id="limit">2/30</span></div>
+    </div>
+    <button class="small-btn" onclick="changeServer()">▾ Change</button>
+  </div>
+
+  <div class="row2">
+    <button onclick="changeServer()">🔄 Auto New Server</button>
+    <button onclick="spin()">🎰 Lucky Spin</button>
+  </div>
+
+  <div class="quick">
+    <b><i class="fa-solid fa-circle-info" style="color:#a855f7"></i> Quick Setup</b>
+    <div style="font-size:13px;color:#9ca3af;margin-top:6px">Server is auto-selected for best performance. Just enter your WhatsApp number to instantly generate a pairing code!</div>
+  </div>
+
+  <b>WhatsApp Number</b>
+  <div class="input-box">
+    <i class="fa-solid fa-phone" style="color:#6b7280"></i>
+    <input id="num" placeholder="9232591xxxx" />
+  </div>
+  <div style="font-size:11px;color:#6b7280">💡 Include country code (e.g., 92 for Pakistan)</div>
+
+  <button class="gen-btn" onclick="generate()"><i class="fa-solid fa-key"></i> Generate Pair Code</button>
+
+  <div class="code-box">
+    <div id="pairCode">Your pairing code will appear here</div>
+    <div id="timer" class="timer"></div>
+  </div>
+
+  <div class="footer">© 2026 SHAZI XMD | Powered By ShaziTech</div>
+</div>
+
+<audio id="clickSound" src="https://assets.mixkit.co/sfx/preview/mixkit-modern-click-box-check-1120.mp3"></audio>
+
+<script>
+let isDark=true, soundOn=true, servers=[22,34,43,51,67], cur=2;
+function toggleTheme(){
+  document.body.classList.toggle('light');
+  isDark=!isDark;
+}
+function toggleSound(){
+  soundOn=!soundOn;
+  document.getElementById('volIcon').className = soundOn ? 'fa-solid fa-volume-high' : 'fa-solid fa-volume-xmark';
+}
+function play(){ if(soundOn) document.getElementById('clickSound').play(); }
+function changeServer(){
+  play();
+  cur = (cur+1)%servers.length;
+  document.getElementById('serverNum').innerText = servers[cur];
+  document.getElementById('limit').innerText = Math.floor(Math.random()*10)+"/30";
+  document.getElementById('rate').innerText = Math.floor(Math.random()*30+70)+"%";
+}
+function spin(){
+  play();
+  alert("🎉 Lucky Spin: You got Server "+servers[Math.floor(Math.random()*servers.length)]+" !");
+  changeServer();
+}
+function toggleLang(){ alert("Language: English / Urdu"); }
+
+let countdown;
+async function generate(){
+  play();
+  let num = document.getElementById('num').value.replace(/[^0-9]/g,"");
+  if(num.length < 10) return alert("Number sahi likho bhai, 923... se");
+  let box = document.getElementById('pairCode');
+  box.innerText = "Generating...";
+  try{
+    let res = await fetch(`/api/pair?num=${num}`);
+    let data = await res.json();
+    if(data.code){
+      box.innerText = data.code;
+      startTimer(30);
+    } else {
+      box.innerText = data.error || "Error";
+    }
+  }catch(e){
+    box.innerText = "API /pair check karo";
+  }
+}
+function startTimer(sec){
+  clearInterval(countdown);
+  let t=document.getElementById('timer');
+  countdown=setInterval(()=>{
+    t.innerText=`Expires in ${sec}s ⏳`;
+    sec--;
+    if(sec<0){clearInterval(countdown); t.innerText="Code Expired, Generate Again"; document.getElementById('pairCode').innerText="Your pairing code will appear here";}
+  },1000);
+}
+</script>
+</body>
+  </html>
